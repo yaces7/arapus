@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
-import * as THREE from 'three';
+import { SphereGeometry, BoxGeometry, MeshStandardMaterial, Mesh } from 'three';
 
 // This component renders a 3D robot face with different expressions
 function AIFace({ emotion, speaking, position }) {
@@ -72,48 +71,48 @@ function AIFace({ emotion, speaking, position }) {
   // Create the robot face parts
   const createRobotFace = () => {
     // Create materials
-    const faceMaterial = new THREE.MeshStandardMaterial({ 
+    const faceMaterial = new MeshStandardMaterial({ 
       color: 0x4285f4, 
       metalness: 0.8,
       roughness: 0.2
     });
     
-    const eyeMaterial = new THREE.MeshStandardMaterial({ 
+    const eyeMaterial = new MeshStandardMaterial({ 
       color: 0x66ffff,
       emissive: 0x33cccc,
       emissiveIntensity: 0.5
     });
     
-    const mouthMaterial = new THREE.MeshStandardMaterial({ 
+    const mouthMaterial = new MeshStandardMaterial({ 
       color: 0x66ffff,
       emissive: 0x33cccc,
       emissiveIntensity: 0.3
     });
     
     // Create face shape
-    const faceGeometry = new THREE.SphereGeometry(1, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.6);
-    const face = new THREE.Mesh(faceGeometry, faceMaterial);
+    const faceGeometry = new SphereGeometry(1, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.6);
+    const face = new Mesh(faceGeometry, faceMaterial);
     face.rotation.x = Math.PI * 0.1;
     group.current.add(face);
     
     // Create eyes
-    const eyeGeometry = new THREE.SphereGeometry(0.15, 16, 16);
+    const eyeGeometry = new SphereGeometry(0.15, 16, 16);
     
     // Left eye
-    const eyeLeft = new THREE.Mesh(eyeGeometry, eyeMaterial);
+    const eyeLeft = new Mesh(eyeGeometry, eyeMaterial);
     eyeLeft.position.set(-0.3, 0.2, 0.85);
     eyeLeftRef.current = eyeLeft;
     group.current.add(eyeLeft);
     
     // Right eye
-    const eyeRight = new THREE.Mesh(eyeGeometry, eyeMaterial);
+    const eyeRight = new Mesh(eyeGeometry, eyeMaterial);
     eyeRight.position.set(0.3, 0.2, 0.85);
     eyeRightRef.current = eyeRight;
     group.current.add(eyeRight);
     
     // Create mouth
-    const mouthGeometry = new THREE.BoxGeometry(0.5, 0.1, 0.1);
-    const mouth = new THREE.Mesh(mouthGeometry, mouthMaterial);
+    const mouthGeometry = new BoxGeometry(0.5, 0.1, 0.1);
+    const mouth = new Mesh(mouthGeometry, mouthMaterial);
     mouth.position.set(0, -0.3, 0.85);
     mouthRef.current = mouth;
     group.current.add(mouth);
@@ -172,7 +171,7 @@ function AIFace({ emotion, speaking, position }) {
         // Smile
         mouthRef.current.scale.y = 0.2;
         mouthRef.current.position.y = -0.25;
-        mouthRef.current.geometry = new THREE.BoxGeometry(0.5, 0.1, 0.1);
+        mouthRef.current.geometry = new BoxGeometry(0.5, 0.1, 0.1);
         mouthRef.current.rotation.z = 0;
         mouthRef.current.rotation.x = 0.1;
         break;
@@ -187,7 +186,7 @@ function AIFace({ emotion, speaking, position }) {
         // Frown
         mouthRef.current.scale.y = 0.2;
         mouthRef.current.position.y = -0.35;
-        mouthRef.current.geometry = new THREE.BoxGeometry(0.5, 0.1, 0.1);
+        mouthRef.current.geometry = new BoxGeometry(0.5, 0.1, 0.1);
         mouthRef.current.rotation.z = 0;
         mouthRef.current.rotation.x = -0.1;
         break;
@@ -202,7 +201,7 @@ function AIFace({ emotion, speaking, position }) {
         // Neutral mouth
         mouthRef.current.scale.y = 0.2;
         mouthRef.current.position.y = -0.3;
-        mouthRef.current.geometry = new THREE.BoxGeometry(0.3, 0.1, 0.1);
+        mouthRef.current.geometry = new BoxGeometry(0.3, 0.1, 0.1);
         mouthRef.current.rotation.z = 0;
         mouthRef.current.rotation.x = 0;
         break;
@@ -217,7 +216,7 @@ function AIFace({ emotion, speaking, position }) {
         // Small mouth
         mouthRef.current.scale.y = 0.15;
         mouthRef.current.position.y = -0.3;
-        mouthRef.current.geometry = new THREE.BoxGeometry(0.2, 0.1, 0.1);
+        mouthRef.current.geometry = new BoxGeometry(0.2, 0.1, 0.1);
         mouthRef.current.rotation.z = 0;
         mouthRef.current.rotation.x = 0;
         break;
@@ -233,7 +232,7 @@ function AIFace({ emotion, speaking, position }) {
         // Neutral mouth
         mouthRef.current.scale.y = 0.2;
         mouthRef.current.position.y = -0.3;
-        mouthRef.current.geometry = new THREE.BoxGeometry(0.4, 0.1, 0.1);
+        mouthRef.current.geometry = new BoxGeometry(0.4, 0.1, 0.1);
         mouthRef.current.rotation.z = 0;
         mouthRef.current.rotation.x = 0;
         break;
