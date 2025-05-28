@@ -14,7 +14,7 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "three": "^0.158.0",
-    "react-three-fiber": "^6.0.13",
+    "@react-three/fiber": "^8.15.11",
     "@react-three/drei": "^9.88.0",
     "axios": "^1.6.0",
     "dotenv": "^16.3.1",
